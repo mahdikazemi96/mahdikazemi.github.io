@@ -6,7 +6,7 @@ test("homepage, photograph, article and responsive navigation", async ({
 }, testInfo) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/");
+  await page.goto("./");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "MahdiKazemi.",
   );
@@ -57,7 +57,7 @@ test("homepage, photograph, article and responsive navigation", async ({
 
 test("WCAG accessibility and reduced motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
+  await page.goto("./");
   const result = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
     .analyze();
@@ -76,11 +76,11 @@ test("WCAG accessibility and reduced motion", async ({ page }) => {
 test("production HTML contains content and SEO without JavaScript", async ({
   request,
 }) => {
-  const html = await (await request.get("/")).text();
+  const html = await (await request.get("./")).text();
   expect(html).toContain("Understanding Domain-Driven Design");
   expect(html).toContain("application/ld+json");
   expect(html).toContain("https://mahdikazemi96.github.io/");
   expect(html).not.toContain("__SITE_");
-  expect((await request.get("/sitemap.xml")).ok()).toBeTruthy();
-  expect((await request.get("/robots.txt")).ok()).toBeTruthy();
+  expect((await request.get("sitemap.xml")).ok()).toBeTruthy();
+  expect((await request.get("robots.txt")).ok()).toBeTruthy();
 });

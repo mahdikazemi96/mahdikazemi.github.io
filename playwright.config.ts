@@ -1,10 +1,12 @@
 import { defineConfig, devices } from "@playwright/test";
+import site from "./site.config.json" with { type: "json" };
+const previewURL = `http://127.0.0.1:4175${new URL(process.env.SITE_URL || site.url).pathname}`;
 
 export default defineConfig({
   testDir: "./tests",
   reporter: "list",
   use: {
-    baseURL: "http://127.0.0.1:4173",
+    baseURL: previewURL,
     channel: "chrome",
     screenshot: "only-on-failure",
     trace: "retain-on-failure",
@@ -30,8 +32,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "npm run preview",
-    url: "http://127.0.0.1:4173",
+    command: "npm run preview -- --port 4175",
+    url: previewURL,
     reuseExistingServer: !process.env.CI,
   },
 });

@@ -1,4 +1,7 @@
 import { chromium } from "@playwright/test";
+import { readFile } from "node:fs/promises";
+const site = JSON.parse(await readFile("site.config.json", "utf8"));
+const previewURL = `http://127.0.0.1:4173${new URL(site.url).pathname}`;
 import { mkdir } from "node:fs/promises";
 
 await mkdir("qa", { recursive: true });
@@ -13,7 +16,7 @@ try {
       viewport: { width, height },
       deviceScaleFactor: 1,
     });
-    await page.goto("http://127.0.0.1:4173/", { waitUntil: "networkidle" });
+    await page.goto(previewURL, { waitUntil: "networkidle" });
     await page.screenshot({ path: `qa/${name}.png`, fullPage: true });
     await page.screenshot({ path: `qa/${name}-hero.png` });
     console.log(
