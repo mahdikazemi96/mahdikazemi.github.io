@@ -1,0 +1,11 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+.DS_Store
+*.local
+.env*
+tmp/
+portrait-inspection.jpg
+article-extracted.txt
+qa/
