@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Open `http://127.0.0.1:5173/mahdikazemi.github.io/`. For the actual production output:
+Open `http://127.0.0.1:5173/`. For the actual production output:
 
 ```sh
 npm run typecheck
@@ -20,7 +20,7 @@ npm run build
 npm run preview
 ```
 
-Open `http://127.0.0.1:4173/mahdikazemi.github.io/`. The build pre-renders the React page into HTML, then hydrates it in the browser. Content, links, and SEO are present even before JavaScript loads. Navigation uses fragment identifiers, so section links and refreshes need no server rewrite rules.
+Open `http://127.0.0.1:4173/`. The build pre-renders the React page into HTML, then hydrates it in the browser. Content, links, and SEO are present even before JavaScript loads. Navigation uses fragment identifiers, so section links and refreshes need no server rewrite rules.
 
 ## Project structure
 
@@ -42,12 +42,12 @@ The supplied `7B6A0751.JPG` and `1.DDD-Article.pdf` are preserved at the reposit
 
 ## Publish to GitHub Pages
 
-1. Use the repository **`mahdikazemi96/mahdikazemi.github.io`** and push this project to its `main` branch. Commit `package-lock.json` and all assets under `public/`.
+1. Use the repository **`mahdikazemi96/mahdikazemi96.github.io`** and push this project to its `main` branch. Commit `package-lock.json` and all assets under `public/`.
 2. In **Settings → Pages → Build and deployment**, select **GitHub Actions**.
 3. Push to `main`, or run **Build and deploy GitHub Pages** from Actions. The workflow installs locked dependencies, checks TypeScript and ESLint, builds, uploads the official Pages artifact, and deploys it.
-4. Wait for the deployment job to succeed. The expected URL is **https://mahdikazemi96.github.io/mahdikazemi.github.io/**.
+4. Wait for the deployment job to succeed. The public URL is **https://mahdikazemi96.github.io/**.
 
-The initially requested `https://mahdikazemi.github.io/` belongs to the username `mahdikazemi`, not `mahdikazemi96`. The selected repository is a project site, so its name is included in the URL path. It has been prepared locally; a successful local build is not a live deployment.
+The repository name matches the account's user-site name, so the website is served directly at the root URL. The old `/mahdikazemi.github.io/` homepage redirects to the root, preserving section anchors when JavaScript is available. A successful local build is not proof of a completed deployment; check the GitHub Actions run.
 
 The build job has read-only repository access. Only the deploy job has `pages: write` and `id-token: write`. GitHub supplies its standard workflow token; no custom secrets are needed.
 
